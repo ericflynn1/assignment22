@@ -18,7 +18,7 @@ let taxiModel = Backbone.Model.extend({
         playerLocation: [0, 0],
         fuel: 10,
         score: 0,
-        passLocation: [Math.floor(Math.random() * 11), Math.floor(Math.random() * 11)],
+        passLocation: [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)],
 
     },
 },
