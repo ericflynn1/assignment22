@@ -29,12 +29,12 @@ let taxiModel = Backbone.Model.extend({
             this.get('playerLocation')[0] + y,
         ]},
 
-        fuel: function () {
+    fuel: function () {
 
-        },
+    },
 
 
-    );
+);
 
 let taxiCollection = Backbone.Collection.extend({
     model: taxiModel,
@@ -53,35 +53,49 @@ let taxiView = Backbone.View.extend({
     },
     ups: function () {
         let upper = new taxiModel();
-        this.model.set("fuel", this.get("fuel")-1);
+        this.model.set("fuel", this.get("fuel") - 1);
     },
     downs: function () {
         let downer = new taxiModel();
-        this.model.set("fuel", this.get("fuel")-1);
+        this.model.set("fuel", this.get("fuel") - 1);
     },
     lefts: function () {
         let lefter = new taxiModel();
-        this.model.set("fuel", this.get("fuel")-1);
+        this.model.set("fuel", this.get("fuel") - 1);
     },
     rights: function () {
         let righter = new taxiModel();
-        this.model.set("fuel", this.get("fuel")-1);
+        this.model.set("fuel", this.get("fuel") - 1);
+    },
+    render: function (){
+        let parent = this.el.querySelector('#user-info');
+        prent.innerHTML = '';
+        for (let i = 0; i < this.model.length; i++){
+            let username = this.model.at(i).get('username');
+            let score = this.model.at(i).get('score');
+            let playerLocation = this.model.at(i).get('playerLocation');
+            let passLocation = this.model.at(i).get('passLocation');
+            
+            let container = document.createElement('div');
+            container.innerHTML = '<h3>' + username + '</h3><h4>' + score + '</h4><h5>' + playerLocation + '</h5><h5>' + passLocation + '</h5><h5>' + fuel + '</h5>';
     }
-})
-
-
-
-
-
-
-
-
-
-
-window.addEventListener('load', function(){
-    let actualModel = new taxiCollection();
-    let actualView = new taxiView({
-        el: document.querySelector('body'),
-        model: actualModel,
-    });
+    }
 });
+
+
+
+
+
+
+
+
+
+
+
+    window.addEventListener('load', function () {
+        let actualModel = new taxiCollection();
+        let actualView = new taxiView({
+            el: document.querySelector('body'),
+            model: actualModel,
+        });
+    });
