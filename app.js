@@ -24,29 +24,64 @@ let taxiModel = Backbone.Model.extend({
 },
 
     movement: function (x, y) {
-        this.set('playerLocation',[
+        this.set('playerLocation', [
             this.get('playerLocation')[0] + x,
             this.get('playerLocation')[0] + y,
-        ]);
-    });
+        ]},
 
-    let taxiCollection = Backbone.Collection.extend({
-        model: taxiModel,
-    });
+        fuel: function () {
 
-    let taxiView = Backbone.View.extend({
-        initialize: function () {
-            console.log('working');
-            this.model.on('change', this.render, this);
         },
-        events: {
-            'click #upBtn': 'ups',
-            'click #downBtn': 'downs',
-            'click #leftBtn': 'lefts',
-            'click #rightBtn': 'rights',
-        },
-        ups: function () {
-            let upper = new taxiModel();
-            this.model.set()
-        }
-    })
+
+
+    );
+
+let taxiCollection = Backbone.Collection.extend({
+    model: taxiModel,
+});
+
+let taxiView = Backbone.View.extend({
+    initialize: function () {
+        console.log('working');
+        this.model.on('change', this.render, this);
+    },
+    events: {
+        'click #upBtn': 'ups',
+        'click #downBtn': 'downs',
+        'click #leftBtn': 'lefts',
+        'click #rightBtn': 'rights',
+    },
+    ups: function () {
+        let upper = new taxiModel();
+        this.model.set("fuel", this.get("fuel")-1);
+    },
+    downs: function () {
+        let downer = new taxiModel();
+        this.model.set("fuel", this.get("fuel")-1);
+    },
+    lefts: function () {
+        let lefter = new taxiModel();
+        this.model.set("fuel", this.get("fuel")-1);
+    },
+    rights: function () {
+        let righter = new taxiModel();
+        this.model.set("fuel", this.get("fuel")-1);
+    }
+})
+
+
+
+
+
+
+
+
+
+
+window.addEventListener('load', function(){
+    let actualModel = new taxiCollection();
+    let actualView = new taxiView({
+        el: document.querySelector('body'),
+        model: actualModel,
+    });
+});
